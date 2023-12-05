@@ -70,18 +70,14 @@ func part2(f *os.File) {
 	scanner := bufio.NewScanner(f)
 
 	cardCounts := make(map[int]int, 198)
-	fmt.Println("CARD COUNTS:", cardCounts)
 	for scanner.Scan() {
 		card := strings.Split(scanner.Text(), ":")
 		cardNumber, _ := strconv.Atoi(strings.Fields(card[0])[1])
-
 		cardCounts[cardNumber]++
-
 		winCount := isWinner(card[1])
-		fmt.Println("Card ", cardNumber, "has", winCount, "wins")
-		for i := cardNumber + 1; i < cardNumber+winCount; i++ {
+		for i := cardNumber + 1; i <= cardNumber+winCount; i++ {
 			fmt.Println("Adding dup of card", i)
-			cardCounts[i]++
+			cardCounts[i] += cardCounts[cardNumber]
 			fmt.Println("CARD COUNTS:", cardCounts)
 		}
 	}
