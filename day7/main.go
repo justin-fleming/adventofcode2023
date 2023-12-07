@@ -9,10 +9,6 @@ import (
 	"strings"
 )
 
-// type Card struct{}
-
-// type HandType struct{}
-
 type Hand struct {
 	cards    []int
 	handType int
@@ -84,6 +80,7 @@ func main() {
 	fmt.Println("***** Part 1 Answer:", answer)
 }
 
+// Implement the Sort interface to sort the hands by type (ie. 3 of a kind is better than a pair)
 type HandByType []Hand
 
 func (h HandByType) Len() int {
