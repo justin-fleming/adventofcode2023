@@ -10,10 +10,12 @@ import (
 )
 
 type Hand struct {
-	cards    []int
-	handType int
-	handNum  int
-	bid      int
+	cards          []int
+	optimizedCards []int
+	handType       int
+	optHandType    int
+	handNum        int
+	bid            int
 }
 
 func main() {
@@ -46,10 +48,16 @@ func main() {
 		line := strings.Fields(scanner.Text())
 
 		tempCards := make([]int, 5)
+		tempCardsOpt := make([]int, 5)
 		var tempType int
 
 		for i, c := range strings.Split(line[0], "") {
 			tempCards[i] = cardMap[c]
+			if c == "J" {
+				tempCardsOpt[i] = 1
+			} else {
+				tempCardsOpt[i] = cardMap[c]
+			}
 			tempType = getHandType(tempCards)
 		}
 
@@ -144,6 +152,7 @@ func getHandType(hand []int) int {
 	threeFound := false
 	twoFound := false
 
+	// TODO: add logic for optimal hand type here...
 	for _, v := range cardCounts {
 		if v == 5 {
 			return 7
